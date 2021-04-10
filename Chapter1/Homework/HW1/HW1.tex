@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Sans CJK SC}
+\begin{document}
+1.3
+\\机器人的世界坐标为$x_a,y_a$,相对于世界坐标系的方向$\theta_a$.则
+\\$$T_{a}^W=
+\left[                
+	\begin{array}{ccc}   
+		cos(\theta_a)  & -sin(\theta_a) & x_a \\  
+		sin(\theta_a) & cos(\theta_a)  & y_a \\  
+		0            & 0            & 1 \\  
+	\end{array}
+\right]
+$$
+\\假设机器人旁边有一物体在世界坐标系下的位姿为($x_b,y_b,\theta_b$)
+\\$$T_{b}^W=
+\left[                
+	\begin{array}{ccc}   
+		cos(\theta_b)  & -sin(\theta_b) & x_b \\  
+		sin(\theta_b) & cos(\theta_b)  & y_b \\  
+		0            & 0            & 1 \\  
+	\end{array}
+\right]
+$$
+\\(1)该物体在当前机器人坐标系下的位姿
+\\$$T_{b}^a=T_{W}^a*T_{b}^W=(T_{a}^W)^{-1}*T_{b}^W$$
+\\ 则b在a下的位姿为$(T_{b}^a(0,2),T_{b}^a(1,2),atan2(T_{b}^a(1,0),T_{b}^a(0,0)))$.
+\\(2)机器人此时朝它的正前方(机器人坐标系 $X$ 轴)与巩固行进了 $d$距离,然后又转了 $\theta_d$角,则有
+\\$$T_{a'}^a=
+\left[                
+	\begin{array}{ccc}   
+		cos(\theta_d)  & -sin(\theta_d) & d \\  
+		sin(\theta_d) & cos(\theta_d)  & 0 \\  
+		0            & 0            & 1 \\  
+	\end{array}
+\right]
+$$
+\\物体此时在这一时刻机器人坐标系下的位姿是
+\\$$T_{b}^{a'}=T_{a}^{a'}*T_{W}^{a}*T_{b}^W=(T_{a'}^{a})^{-1}*(T_{a}^W)^{-1}*T_{b}^W$$
+\\ 则b在$a'$下的位姿为$(T_{b}^{a'}(0,2),T_{b}^{a'}(1,2),atan2(T_{b}^{a'}(1,0),T_{b}^{a'}(0,0)))$.
+\end{document}
